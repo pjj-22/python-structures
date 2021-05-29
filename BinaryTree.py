@@ -37,6 +37,29 @@ class Node:
             #easier to check validity
             newData = random.randint(0, 1000)
             self.insertNode(newData)
+
+    def nodeExists(self, num):
+        if num == self.data:
+            return True
+        elif num < self.data and self.leftChild is not None:
+            if self.leftChild.nodeExists(num): return True
+            else: return False
+        elif num > self.data and self.rightChild is not None:
+            if self.rightChild.nodeExists(num): return True
+            else: return False
+
+    def treeDepth(self):
+        right, left = 0, 0
+        if self.rightChild is not None: 
+            right = self.rightChild.treeDepth() + 1
+        if self.leftChild is not None: 
+            left = self.leftChild.treeDepth() + 1
+        if right > left:
+            return right
+        else:
+            return left         
+
+
        
 
 
@@ -45,5 +68,8 @@ class Node:
 
 root = Node(500)
 root.fillTree(100)
-root.inOrderTraversal()
+#root.inOrderTraversal()
+print(root.treeDepth())
+
+print(root.nodeExists(150))
 
